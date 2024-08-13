@@ -86,3 +86,17 @@ sequelize-auto -o "./models" -d nome_do_banco -h localhost -u seu_usuario -p 543
 -p 5432: Porta do banco de dados PostgreSQL.
 -x sua_senha: Senha do banco de dados.
 -e postgres: Dialeto do banco de dados (neste caso, postgres).
+
+npx sequilize-cli model:generate --name Endereco --attributes endereco:string,bairro:string,cidade:string,cep:integer,complemento:string
+npx sequelize-cli model:generate --name EnderecoUsuario --attributes endereco_id:integer,usuario_id:integer
+npx sequelize-cli model:generate --name Usuario --attributes nome:string,email:string,password:string,user:string,cpf:integer
+npx sequelize-cli model:generate --name TelefoneUsuario --attributes telefone_id:integer,usuario_id:integer
+npx sequelize-cli model:generate --name Telefone --attributes telefone:integer         
+npx sequelize-cli model:generate --name Venda --attributes usuario_id:integer,valor_total:integer           
+npx sequelize-cli model:generate --name Pedido --attributes produto_id:integer,venda_id:integer    
+npx sequelize-cli model:generate --name Produto --attributes enabled:boolean,slug:string,use_in_menu:boolean,stock:integer,description:string,price:decimal,price_with_discount:decimal,categoria_id:integer,marca:string   
+npx sequelize-cli model:generate --name OpcoesProdutos --attributes produto_id:integer,title:string,shape:string,radius:integer,type:string,values:string        
+npx sequelize-cli model:generate --name ProdutoImg --attributes produto_id:integer,imagem_id:integer 
+npx sequelize-cli model:generate --name Imagem --attributes produto_id:integer,enabled:string,path:string 
+npx sequelize-cli model:generate --name ProdutoCategoria --attributes categoria_id:integer,produto_id:integer 
+npx sequelize-cli model:generate --name Categoria --attributes nome:string,slug:string,use_in_menu:boolean    
