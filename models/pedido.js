@@ -22,3 +22,15 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Pedido;
 };
+
+Pedido.associate = 
+function (models) {
+  Pedido.belongsTo(models.Venda,
+  { foreingnKey: 'venda_id' });
+  
+  Pedido.belongsTo(models.Produto, {
+    foreingnKey: 'produto_id'});
+
+  };
+
+  

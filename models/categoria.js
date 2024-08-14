@@ -23,3 +23,16 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Categoria;
 };
+
+Categoria.associate = 
+function (models) {
+
+Categoria.hasMany (models.Produto,  
+  {forreignKey: 'categoria_id'});
+
+Categoria.belongsToMany (models.Produto,
+  { through: models.ProdutoCategoria,
+    forreignKey: 'categoria_id'});
+    
+  };    
+  

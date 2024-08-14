@@ -23,3 +23,11 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Imagem;
 };
+
+Imagem.associate = 
+function (models) {
+
+Imagem.belongsTo (models.Produto,
+{ foreignKey: 'produtos_id' });
+
+};

@@ -22,3 +22,14 @@ module.exports = (sequelize, DataTypes) => {
   });
   return TelefoneUsuario;
 };
+
+TelefoneUsuario.associate =
+function (models) {
+
+TelefoneUsuario.belongsTo(models.Telefone,
+  { foreingnKey: 'telefone_id' });
+  
+TelefoneUsuario.belongsTo(models.Usuarios,
+  { foreingnKey: 'usuario_id' });
+  
+};

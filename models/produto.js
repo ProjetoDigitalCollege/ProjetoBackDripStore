@@ -29,3 +29,32 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Produto;
 };
+
+Produto.associate = 
+function (models) {
+
+  Produto.belongsTo (models.Categoria,
+  { foreignKey: 'categoria_id' });
+  
+  Produto.hasMany (models.OpcoesProductos,
+    {forreignKey: 'produto_id'});
+
+  Produto.hasMany (models.ProdutoImg,
+    {forreignKey: 'produto_id'});
+  
+  Produto.hasMany (models.Pedido,
+      {forreignKey: 'produto_id'});
+
+  Produto.belongsToMany (models.Categoria, 
+    { through: models.ProdutoCategoria,
+    foreignKey: 'produto_id'});
+   
+  };
+
+  
+
+
+
+    )
+  )
+}

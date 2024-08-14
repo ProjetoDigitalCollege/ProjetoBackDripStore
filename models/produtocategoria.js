@@ -22,3 +22,14 @@ module.exports = (sequelize, DataTypes) => {
   });
   return ProdutoCategoria;
 };
+
+ProdutoCategoria.associate = 
+function (models) {
+
+ProdutoCategoria.BelongsTo (models.Categoria,
+  { foreignKey: 'categoria_id' }); 
+  
+ProdutoCategoria.BelongsTo (models.Produto,
+  { foreignKey: 'produto_id' });
+  
+};  

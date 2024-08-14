@@ -22,3 +22,10 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Venda;
 };
+
+Venda.associate = function(models) {
+  Venda.belongsTo(models.Usuaio,
+  { foreignKey:'usuario_id'});
+  Venda.hasMany (models.Pedido, {
+    foreignKey: 'venda_id' });
+    };

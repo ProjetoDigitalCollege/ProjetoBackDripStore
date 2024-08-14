@@ -22,3 +22,14 @@ module.exports = (sequelize, DataTypes) => {
   });
   return EnderecoUsuario;
 };
+
+EnderecoUsuario.associate = 
+function (models) {
+
+EnderecoUsuario.belongsTo(models.Endereco, 
+  { foreingnKey: 'endereco_id' });
+
+EnderecoUsuario.belongsTo(models.Usuarios,
+  { foreingnKey: 'usuario_id' });  
+  
+};

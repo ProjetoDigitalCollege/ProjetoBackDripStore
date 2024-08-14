@@ -26,3 +26,10 @@ module.exports = (sequelize, DataTypes) => {
   });
   return OpcoesProdutos;
 };
+
+OpcoesProdutos.associate = function(models) {
+  
+OpcoesProdutos.belongsTo(models.Produtos, 
+  { foreingnKey: 'produtos_id' });
+
+};
