@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   OpcoesProdutos.init({
     produto_id: DataTypes.INTEGER,
     title: DataTypes.STRING,
-    shape: {DataTypes.ENUM('square','circle'), defaultValue: 'square'},
+    // shape: {DataTypes.ENUM('square','circle'), defaultValue: 'square'},
     radius: DataTypes.INTEGER,
     type: DataTypes.ENUM('text','image'),
     values: DataTypes.STRING

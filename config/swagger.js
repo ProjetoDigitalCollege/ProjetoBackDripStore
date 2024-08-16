@@ -36,7 +36,7 @@ const options = {
                 },
             },
         },
-  },
+    },
     apis: ['./routes/*.js'], // Caminho para os arquivos de rotas onde você vai documentar as rotas
 };
 
