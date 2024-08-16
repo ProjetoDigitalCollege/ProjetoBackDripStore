@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sequelize-auto": "sequelize-auto -o './models' -d dripstore -h localhost -u postgres -p 5432 -x 1234 -e postgres"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "back": "file:",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -22,5 +24,8 @@
     "sequelize-cli": "^6.6.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "sequelize-auto": "^0.8.8"
   }
 }

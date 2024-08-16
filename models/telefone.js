@@ -1,23 +1,37 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Telefone extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('telefone', {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
+    telefone: {
+      type: DataTypes.STRING(11),
+      allowNull: false,
+      unique: "telefone_telefone_key"
     }
-  }
-  Telefone.init({
-    telefone: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Telefone',
+    tableName: 'telefone',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "pk_telefone",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+      {
+        name: "telefone_telefone_key",
+        unique: true,
+        fields: [
+          { name: "telefone" },
+        ]
+      },
+    ]
   });
-  return Telefone;
 };

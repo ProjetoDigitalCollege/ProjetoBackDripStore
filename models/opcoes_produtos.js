@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('pedido', {
+  return sequelize.define('opcoes_produtos', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
@@ -15,22 +15,36 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    venda_id: {
+    title: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    shape: {
+      type: DataTypes.ENUM("square","circle"),
+      allowNull: true,
+      defaultValue: "square"
+    },
+    radiu: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'vendas',
-        key: 'id'
-      }
+      allowNull: true
+    },
+    type: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: "text"
+    },
+    values: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'pedido',
+    tableName: 'opcoes_produtos',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "pk_pedido",
+        name: "pk_opcoes_produtos",
         unique: true,
         fields: [
           { name: "id" },

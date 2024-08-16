@@ -1,31 +1,57 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Produto extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('produto', {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
+    enabled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    slug: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    marca: {
+      type: DataTypes.STRING(30),
+      allowNull: true
+    },
+    use_in_menu: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    description: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    price: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    price_with_discount: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
     }
-  }
-  Produto.init({
-    enabled: DataTypes.BOOLEAN,
-    slug: DataTypes.STRING,
-    use_in_menu: DataTypes.BOOLEAN,
-    stock: DataTypes.INTEGER,
-    description: DataTypes.STRING,
-    price: DataTypes.DECIMAL,
-    price_with_discount: DataTypes.DECIMAL,
-    categoria_id: DataTypes.INTEGER,
-    marca: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Produto',
+    tableName: 'produto',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "pk_produto",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
   });
-  return Produto;
 };
