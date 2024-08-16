@@ -1,27 +1,53 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Endereco extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('endereco', {
+    id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
+    rua: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    bairro: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    cidade: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    cep: {
+      type: DataTypes.STRING(9),
+      allowNull: false,
+      unique: "endereco_cep_key"
+    },
+    complemento: {
+      type: DataTypes.STRING(50),
+      allowNull: true
     }
-  }
-  Endereco.init({
-    endereco: DataTypes.STRING,
-    bairro: DataTypes.STRING,
-    cidade: DataTypes.STRING,
-    cep: DataTypes.INTEGER,
-    complemento: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Endereco',
+    tableName: 'endereco',
+    schema: 'public',
+    timestamps: false,
+    indexes: [
+      {
+        name: "endereco_cep_key",
+        unique: true,
+        fields: [
+          { name: "cep" },
+        ]
+      },
+      {
+        name: "pk_endereco",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
   });
-  return Endereco;
 };
