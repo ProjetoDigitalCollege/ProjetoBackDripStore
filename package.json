@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "final-projeto-back-dripstore",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sequelize-auto": "sequelize-auto -o './models' -d dripstore -h localhost -u postgres -p 5432 -x 1234 -e postgres"
+    "migrate": "node scripts/run-migrations.js"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,4 @@
-final-projeto-back-dripstore
+projeto-back-dripstore
 
 -Verificar as versões do node e npm:
 node -v npm -v
@@ -46,23 +46,63 @@ e ativar o type: module
 }
 
 Crie as seguintes migrations:
-npx sequelize-cli model:generate --name User --attributes full_name:string,email:string,password:string
 
-npx sequelize-cli model:generate --name Address --attributes user_id:integer,street:string,number:string,city:string,state:string,zip_code:string
+npx sequilize-cli model:generate --name Endereco --attributes endereco:string,bairro:string,cidade:string,cep:integer,complemento:string
 
-npx sequelize-cli model:generate --name Category --attributes name:string
+npx sequelize-cli model:generate --name EnderecoUsuario --attributes endereco_id:integer,usuario_id:integer
 
-npx sequelize-cli model:generate --name Product --attributes name:string,description:text,price:decimal,stock:integer,category_id:integer
+npx sequelize-cli model:generate --name Usuario --attributes nome:string,email:string,password:string,user:string,cpf:integer
 
-npx sequelize-cli model:generate --name Order --attributes user_id:integer,address_id:integer,status:string
+npx sequelize-cli model:generate --name TelefoneUsuario --attributes telefone_id:integer,usuario_id:integer
+npx sequelize-cli model:generate --name Telefone --attributes telefone:integer   
 
-npx sequelize-cli model:generate --name OrderItem --attributes order_id:integer,product_id:integer,quantity:integer
+npx sequelize-cli model:generate --name Venda --attributes usuario_id:integer,valor_total:integer  
+
+npx sequelize-cli model:generate --name Pedido --attributes produto_id:integer,venda_id:integer 
+
+npx sequelize-cli model:generate --name Produto --attributes enabled:boolean,slug:string,use_in_menu:boolean,stock:integer,description:string,price:decimal,price_with_discount:decimal,categoria_id:integer,marca:string 
+
+npx sequelize-cli model:generate --name OpcoesProdutos --attributes produto_id:integer,title:string,shape:string,radius:integer,type:string,values:string 
+
+npx sequelize-cli model:generate --name ProdutoImg --attributes produto_id:integer,imagem_id:integer 
+
+npx sequelize-cli model:generate --name Imagem --attributes produto_id:integer,enabled:string,path:string 
+
+npx sequelize-cli model:generate --name ProdutoCategoria --attributes categoria_id:integer,produto_id:integer
+
+npx sequelize-cli model:generate --name Categoria --attributes nome:string,slug:string,use_in_menu:boolean    
+
+npx sequelize-cli migration:generate --name create-categoria
+npx sequelize-cli migration:generate --name create-produto
+npx sequelize-cli migration:generate --name create-produto-categoria
+npx sequelize-cli migration:generate --name create-produto-imagem
+npx sequelize-cli migration:generate --name create-imagem
+npx sequelize-cli migration:generate --name create-opcoes-produtos
+npx sequelize-cli migration:generate --name create-pedido
+npx sequelize-cli migration:generate --name create-vendas
+npx sequelize-cli migration:generate --name create-usuario
+npx sequelize-cli migration:generate --name create-endereco
+npx sequelize-cli migration:generate --name create-endereco-usuario
+npx sequelize-cli migration:generate --name create-telefone
+npx sequelize-cli migration:generate --name create-telefone-usuario
 
 Execute as migrations:
 npx sequelize-cli db:migrate
 
 Criar arquivo de seed
-npx sequelize-cli seed:generate --name demo-data
+npx sequelize-cli seed:generate --name seeders-categoria
+npx sequelize-cli seed:generate --name seeders-produto
+npx sequelize-cli seed:generate --name seeders-produto-categoria
+npx sequelize-cli seed:generate --name seeders-produto-imagem
+npx sequelize-cli seed:generate --name seeders-imagem
+npx sequelize-cli seed:generate --name seeders-opcoes-produtos
+npx sequelize-cli seed:generate --name seeders-pedido
+npx sequelize-cli seed:generate --name seeders-vendas
+npx sequelize-cli seed:generate --name seeders-usuario
+npx sequelize-cli seed:generate --name seeders-endereco
+npx sequelize-cli seed:generate --name seeders-endereco-usuario
+npx sequelize-cli seed:generate --name seeders-telefone
+npx sequelize-cli seed:generate --name seeders-telefone-usuario
 
 Execute o seed
 npx sequelize-cli db:seed:all
@@ -87,38 +127,12 @@ sequelize-auto -o "./models" -d nome_do_banco -h localhost -u seu_usuario -p 543
 -x sua_senha: Senha do banco de dados.
 -e postgres: Dialeto do banco de dados (neste caso, postgres).
 
-npx sequilize-cli model:generate --name Endereco --attributes endereco:string,bairro:string,cidade:string,cep:integer,complemento:string
-npx sequelize-cli model:generate --name EnderecoUsuario --attributes endereco_id:integer,usuario_id:integer
-npx sequelize-cli model:generate --name Usuario --attributes nome:string,email:string,password:string,user:string,cpf:integer
-npx sequelize-cli model:generate --name TelefoneUsuario --attributes telefone_id:integer,usuario_id:integer
-npx sequelize-cli model:generate --name Telefone --attributes telefone:integer         
-npx sequelize-cli model:generate --name Venda --attributes usuario_id:integer,valor_total:integer           
-npx sequelize-cli model:generate --name Pedido --attributes produto_id:integer,venda_id:integer    
-npx sequelize-cli model:generate --name Produto --attributes enabled:boolean,slug:string,use_in_menu:boolean,stock:integer,description:string,price:decimal,price_with_discount:decimal,categoria_id:integer,marca:string   
-npx sequelize-cli model:generate --name OpcoesProdutos --attributes produto_id:integer,title:string,shape:string,radius:integer,type:string,values:string        
-npx sequelize-cli model:generate --name ProdutoImg --attributes produto_id:integer,imagem_id:integer 
-npx sequelize-cli model:generate --name Imagem --attributes produto_id:integer,enabled:string,path:string 
-npx sequelize-cli model:generate --name ProdutoCategoria --attributes categoria_id:integer,produto_id:integer 
-npx sequelize-cli model:generate --name Categoria --attributes nome:string,slug:string,use_in_menu:boolean    
-
-
-npx sequelize-cli migration:generate --name create-categoria
-npx sequelize-cli migration:generate --name create-produto
-npx sequelize-cli migration:generate --name create-produto-categoria
-npx sequelize-cli migration:generate --name create-produto-imagem
-npx sequelize-cli migration:generate --name create-imagem
-npx sequelize-cli migration:generate --name create-opcoes-produtos
-npx sequelize-cli migration:generate --name create-pedido
-npx sequelize-cli migration:generate --name create-vendas
-npx sequelize-cli migration:generate --name create-usuario
-npx sequelize-cli migration:generate --name create-endereco
-npx sequelize-cli migration:generate --name create-endereco-usuario
-npx sequelize-cli migration:generate --name create-telefone
-npx sequelize-cli migration:generate --name create-telefone-usuario
 
 /reverter todas migrações
 npx sequelize-cli db:migrate:undo:all
 
+/pegar modelo do banco
+"sequelize-auto": "sequelize-auto -o './models' -d database -h localhost -u postgres -p porta -x password -e postgres"
 
 /modelos do banco por sql
 
