@@ -1,5 +1,6 @@
-const Sequelize = require('sequelize');
-module.exports = function(sequelize, DataTypes) {
+import { DataTypes } from 'sequelize';
+
+export default function(sequelize) {
   return sequelize.define('telefone_usuario', {
     id: {
       autoIncrement: true,
@@ -27,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     sequelize,
     tableName: 'telefone_usuario',
     schema: 'public',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "pk_telefone_usuario",
