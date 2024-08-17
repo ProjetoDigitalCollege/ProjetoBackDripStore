@@ -31,6 +31,9 @@ export async function up(queryInterface, Sequelize) {
       allowNull: false,
       unique: true
     }
+  },{
+    timestamps: true,
+    tableName: 'usuario'
   });
 
   await queryInterface.sequelize.query(`

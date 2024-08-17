@@ -14,6 +14,9 @@ export async function up(queryInterface, Sequelize) {
       allowNull: false,
       unique: true
     }
+  },{
+    timestamps: true,
+    tableName: 'telefone'
   });
 
 }

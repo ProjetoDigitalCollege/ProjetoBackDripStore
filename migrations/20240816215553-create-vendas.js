@@ -21,6 +21,9 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.INTEGER,
       allowNull: true
     }
+  },{
+    timestamps: true,
+    tableName: 'vendas'
   });
 
 }

@@ -42,7 +42,7 @@ export default function(sequelize) {
     sequelize,
     tableName: 'opcoes_produtos',
     schema: 'public',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "pk_opcoes_produtos",

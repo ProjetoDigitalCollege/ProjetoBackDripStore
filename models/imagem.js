@@ -20,7 +20,7 @@ export default function(sequelize) {
     sequelize,
     tableName: 'imagem',
     schema: 'public',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "pk_imagem",

@@ -7,7 +7,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migrate": "node scripts/run-migrations.js"
+    "migrate": "node scripts/run-migrations.js",
+    "seeders": "node scripts/run-seeders.js"
   },
   "keywords": [],
   "author": "",

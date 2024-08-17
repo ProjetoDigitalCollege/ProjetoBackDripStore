@@ -21,6 +21,9 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.BOOLEAN,
       allowNull: true
     }
+  }, {
+    timestamps: true,
+    tableName: 'categoria'
   });
 }
 export async function down(queryInterface, Sequelize) {

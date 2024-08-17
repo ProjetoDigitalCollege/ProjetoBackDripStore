@@ -33,7 +33,7 @@ export default function(sequelize) {
     sequelize,
     tableName: 'endereco',
     schema: 'public',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "endereco_cep_key",

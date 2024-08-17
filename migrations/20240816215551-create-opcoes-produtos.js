@@ -43,6 +43,9 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.INTEGER,
       allowNull: true
     }
+  },{
+    timestamps: true,
+    tableName: 'opcoes_produtos'
   });
 }
 export async function down(queryInterface, Sequelize) {

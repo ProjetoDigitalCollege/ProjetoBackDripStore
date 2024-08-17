@@ -17,7 +17,7 @@ export default function(sequelize) {
     sequelize,
     tableName: 'telefone',
     schema: 'public',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "pk_telefone",

@@ -28,7 +28,7 @@ export default function(sequelize) {
     sequelize,
     tableName: 'produto_categoria',
     schema: 'public',
-    timestamps: false,
+    timestamps: true,
     indexes: [
       {
         name: "pk_produto_categoria",

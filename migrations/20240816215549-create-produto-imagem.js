@@ -25,9 +25,10 @@ export async function up(queryInterface, Sequelize) {
         key: 'id'
       }
     }
+  },{
+    timestamps: true,
+    tableName: 'produto_imagem'
   });
-
-
 }
 export async function down(queryInterface, Sequelize) {
   await queryInterface.dropTable('produto_imagem');

@@ -25,6 +25,9 @@ export async function up(queryInterface, Sequelize) {
         key: 'id'
       }
     }
+  },{
+    timestamps: true,
+    tableName: 'pedido'
   });
 
 

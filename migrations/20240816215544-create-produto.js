@@ -41,6 +41,9 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.DECIMAL(10, 2),
       allowNull: false
     }
+  },{
+    timestamps: true,
+    tableName: 'produto'
   });
 }
 export async function down(queryInterface, Sequelize) {

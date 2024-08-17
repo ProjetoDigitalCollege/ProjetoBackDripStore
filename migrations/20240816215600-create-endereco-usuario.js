@@ -27,6 +27,9 @@ export async function up(queryInterface, Sequelize) {
       },
       onDelete: 'CASCADE'
     }
+  },{
+    timestamps: true,
+    tableName: 'endereco_usuario'
   });
 
 }
