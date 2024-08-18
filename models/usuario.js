@@ -1,62 +1,29 @@
-import { DataTypes } from 'sequelize';
+import { Sequelize } from "sequelize";
+import config from "../config/config.js";
 
-export default function(sequelize) {
-  return sequelize.define('usuario', {
-    id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true
-    },
-    nome: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      unique: "usuario_email_key"
-    },
-    password: {
-      type: DataTypes.STRING(50),
-      allowNull: false
-    },
-    username: {
-      type: DataTypes.STRING(30),
-      allowNull: false
-    },
-    cpf: {
-      type: DataTypes.STRING(11),
-      allowNull: false,
-      unique: "usuario_cpf_key"
+const User = config.define("usuario", {
+  nome: {
+    type: Sequelize.STRING(50),
+    allowNull: true, 
+  },
+  email: {
+    type: Sequelize.STRING(50), 
+    allowNull: false, 
+    unique: true, 
+    validate: {
+      isEmail: true, 
     }
-  }, {
-    sequelize,
-    tableName: 'usuario',
-    schema: 'public',
-    timestamps: true,
-    indexes: [
-      {
-        name: "pk_usuario",
-        unique: true,
-        fields: [
-          { name: "id" },
-        ]
-      },
-      {
-        name: "usuario_cpf_key",
-        unique: true,
-        fields: [
-          { name: "cpf" },
-        ]
-      },
-      {
-        name: "usuario_email_key",
-        unique: true,
-        fields: [
-          { name: "email" },
-        ]
-      },
-    ]
-  });
-};
+  },
+  senha: {
+    type: Sequelize.STRING(100), 
+    allowNull: false, 
+  },
+  cpf: {
+    type: Sequelize.STRING(11), 
+    allowNull: false, 
+    unique: true,
+    validate: { is: /^[0-9]{3}\[0-9]{3}\[0-9]{3}[0-9]{2}$/i}
+  }
+});
+
+export default User;

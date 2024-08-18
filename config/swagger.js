@@ -1,5 +1,5 @@
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 const options = {
     definition: {
@@ -36,13 +36,13 @@ const options = {
                 },
             },
         },
-  },
+    },
     apis: ['./routes/*.js'], // Caminho para os arquivos de rotas onde você vai documentar as rotas
 };
 
 const specs = swaggerJsdoc(options);
 
-module.exports = {
+export default {
     swaggerUi,
     specs,
 };

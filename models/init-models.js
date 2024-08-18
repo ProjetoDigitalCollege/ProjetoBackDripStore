@@ -10,7 +10,7 @@ import _produto_categoria from './produto_categoria.js';
 import _produto_imagem from './produto_imagem.js';
 import _telefone from './telefone.js';
 import _telefone_usuario from './telefone_usuario.js';
-import _usuario from './usuario.js';
+import _usuario from './Usuario.js';
 import _vendas from './vendas.js';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -37,7 +37,7 @@ function initModels() {
   const produto_imagem = _produto_imagem(sequelize, DataTypes);
   const telefone = _telefone(sequelize, DataTypes);
   const telefone_usuario = _telefone_usuario(sequelize, DataTypes);
-  const usuario = _usuario(sequelize, DataTypes);
+  const usuario = new _usuario(sequelize, DataTypes);
   const vendas = _vendas(sequelize, DataTypes);
 
   // Definições das associações
