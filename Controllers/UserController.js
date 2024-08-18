@@ -30,7 +30,7 @@ export const registerUser = async (req, res) => {
     const { nome, email, senha, cpf } = req.body;
 
     const hashedPassword = doHash(senha);
-    const users = await User.create({nome, email, senha: hashedPassword, cpf});
+    const users = await Usuario.create({nome, email, senha: hashedPassword, cpf});
 
     res.status(201).json(users);
   } catch (error) {
@@ -43,7 +43,7 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (request, response) => {
   try {
     const { email, senha} = request.body;
-    const user = await User.findOne({ where: { email } });
+    const user = await Usuario.findOne({ where: { email } });
 
     if(doCompare(senha, user.senha)) {
       response.status(200).json({message: 'Login efetuado com sucesso!'});
