@@ -10,7 +10,6 @@ export const Produto = DBconfig.define("produto", {
   slug: {
     type: Sequelize.STRING(100),
     allowNull: false,
-    unique: true,
   },
   usado_no_menu: {
     type: Sequelize.BOOLEAN,
@@ -28,7 +27,7 @@ export const Produto = DBconfig.define("produto", {
   },
   preco: {
     type: Sequelize.DECIMAL(10, 2),
-    allowNull: false,
+    allowNull: true,
     validate: {
       min: 0,
     }
