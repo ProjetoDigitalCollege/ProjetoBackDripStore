@@ -1,5 +1,4 @@
 import { Usuario } from "../Models/11.Usuario.js";
-import { doCompare, doHash } from "../Middlewares/Hash.js";
 
 // Get - Listar todos os usuários
 export const getAllUsers = async (request, response) => {
@@ -12,46 +11,54 @@ export const getAllUsers = async (request, response) => {
 };
 
 // Get - Listar usuário por ID
-// export const getUserById = async (request, response, next) => {
-//   const userId = parseInt(request.params.id);
-//   const user = await User.findByPk(userId,);
-
-//   if(!user) {
-//       const error = new Error("Usuário não encontrado!");
-//       error.statusCode = 404;
-//       response.json({ user:  null });
-//   }
-// };
-
-// Post - Criar Usuário
-export const registerUser = async (req, res) => {
+export const getUserById = async (request, response) => {
   try {
+    const userId = parseInt(request.params.id);
+    const user = await Usuario.findByPk(userId);
 
-    const { nome, email, senha, cpf } = req.body;
+    if (!user) {
+      const error = new Error("Usuário não encontrado!");
+      error.statusCode = 404;
+      response.json({ user: null });
+    } else {
+      response.status(404).json({ message: 'Usuário não encontrado' });
+    }
+  } catch (error) {
+    response.status(500).json({ error: error.message });
+  }
+};
 
-    const hashedPassword = doHash(senha);
-    const users = await Usuario.create({nome, email, senha: hashedPassword, cpf});
-
-    res.status(201).json(users);
+// Update a user by ID
+export const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [updated] = await User.update(req.body, {
+      where: { id: id }
+    });
+    if (updated) {
+      const updatedUser = await User.findByPk(id);
+      res.status(200).json(updatedUser);
+    } else {
+      res.status(404).json({ message: 'Usuário não encontrado' });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-// POST - LOGIN
-
-export const loginUser = async (request, response) => {
+// Delete a user by ID
+export const deleteUser = async (req, res) => {
   try {
-    const { email, senha} = request.body;
-    const user = await Usuario.findOne({ where: { email } });
-
-    if(doCompare(senha, user.senha)) {
-      response.status(200).json({message: 'Login efetuado com sucesso!'});
+    const { id } = req.params;
+    const deleted = await User.destroy({
+      where: { id: id }
+    });
+    if (deleted) {
+      res.status(204).send();
     } else {
-      response.status(401).json({ error: 'Credenciais inválidas!' });
+      res.status(404).json({ message: 'Usuário não encontrado' });
     }
-
   } catch (error) {
-    console.log(error);
-  };
+    res.status(500).json({ error: error.message });
+  }
 };
