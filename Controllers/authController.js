@@ -2,6 +2,64 @@ import { Usuario } from "../Models/11.Usuario.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Registra um novo usuário
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               senha:
+ *                 type: string
+ *               cpf:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuário criado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       500:
+ *         description: Erro no servidor
+ */
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Realiza o login do usuário
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               senha:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login realizado com sucesso
+ *       401:
+ *         description: Credenciais inválidas
+ *       500:
+ *         description: Erro no servidor
+ */
+
 export const registerUser = async (request, response) => {
       try {
     
@@ -47,15 +105,3 @@ export const authController = {
     }
 };
 
-
-// export const loginUser = async (request, response) => {
-//   try {
-//     const { email, senha } = request.body;
-//     const user = await Usuario.findOne({ where: { email } });
-
-    
-
-//   } catch (error) {
-//     console.log(error);
-//   };
-// };
