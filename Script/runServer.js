@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import { router } from "../Routes/index.js";
+import { swaggerUI, specs } from '../Config/swagger.js';
 
 export const runServer = async () => {
   const app = express();
@@ -15,6 +16,7 @@ export const runServer = async () => {
   
   app.use('/api', router);
   
+  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
   
   app.listen(port, () => {
     try{
