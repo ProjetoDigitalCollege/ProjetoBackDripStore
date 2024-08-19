@@ -15,8 +15,8 @@ router.post('/user/login', authController.login);
 //Usuário rotas
 router.get('/user', getAllUsers);
 router.get('/user/:id', getUserById);
-router.get('/user/:id', updateUser);
-router.get('/user/:id', deleteUser);
+router.put('/user/:id', updateUser);
+router.delete('/user/:id', deleteUser);
 
 // Endereços rotas
 router.get('/addresses', getAllAddresses);

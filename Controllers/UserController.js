@@ -21,7 +21,7 @@ export const getUserById = async (request, response) => {
       error.statusCode = 404;
       response.json({ user: null });
     } else {
-      response.status(404).json({ message: 'Usuário não encontrado' });
+      response.status(200).json({ user });
     }
   } catch (error) {
     response.status(500).json({ error: error.message });
@@ -29,36 +29,36 @@ export const getUserById = async (request, response) => {
 };
 
 // Update a user by ID
-export const updateUser = async (req, res) => {
+export const updateUser = async (request, response) => {
   try {
-    const { id } = req.params;
-    const [updated] = await User.update(req.body, {
+    const { id } = request.params;
+    const [updated] = await Usuario.update(request.body, {
       where: { id: id }
     });
     if (updated) {
-      const updatedUser = await User.findByPk(id);
-      res.status(200).json(updatedUser);
+      const updatedUser = await Usuario.findByPk(id);
+      return response.status(200).json(updatedUser);
     } else {
-      res.status(404).json({ message: 'Usuário não encontrado' });
+      return response.status(404).json({ message: 'Usuário não encontrado' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
 // Delete a user by ID
-export const deleteUser = async (req, res) => {
+export const deleteUser = async (request, response) => {
   try {
-    const { id } = req.params;
-    const deleted = await User.destroy({
+    const { id } = request.params;
+    const deleted = await Usuario.destroy({
       where: { id: id }
     });
     if (deleted) {
-      res.status(204).send();
+      response.status(204).send();
     } else {
-      res.status(404).json({ message: 'Usuário não encontrado' });
+      response.status(404).json({ message: 'Usuário não encontrado' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
