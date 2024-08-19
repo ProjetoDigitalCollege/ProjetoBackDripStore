@@ -1,66 +1,66 @@
 import { Endereco } from "../Models/2.Endereco.js"
 
-export const getAllAddresses = async (req, res) => {
+export const getAllAddresses = async (request, response) => {
   try {
     const endereco = await Endereco.findAll();
-    res.status(200).json(endereco);
+    response.status(200).json(endereco);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const getAddressById = async (req, res) => {
+export const getAddressById = async (request, response) => {
   try {
-    const { id } = req.params;
+    const { id } = request.params;
     const endereco = await Endereco.findByPk(id);
     if (endereco) {
-      res.status(200).json(endereco);
+      response.status(200).json(endereco);
     } else {
-      res.status(404).json({ message: 'Endereço não encontrado' });
+      response.status(404).json({ message: 'Endereço não encontrado' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const createAddress = async (req, res) => {
+export const createAddress = async (request, response) => {
   try {
-    const endereco = await Endereco.create(req.body);
-    res.status(201).json(endereco);
+    const endereco = await Endereco.create(request.body);
+    response.status(201).json(endereco);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const updateAddress = async (req, res) => {
+export const updateAddress = async (request, response) => {
   try {
-    const { id } = req.params;
-    const [updated] = await Endereco.update(req.body, {
+    const { id } = request.params;
+    const [updated] = await Endereco.update(request.body, {
       where: { id: id }
     });
     if (updated) {
       const updatedAddress = await Endereco.findByPk(id);
-      res.status(200).json(updatedAddress);
+      response.status(200).json(updatedAddress);
     } else {
-      res.status(404).json({ message: 'Endereço não encontrado' });
+      response.status(404).json({ message: 'Endereço não encontrado' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const deleteAddress = async (req, res) => {
+export const deleteAddress = async (request, response) => {
   try {
-    const { id } = req.params;
+    const { id } = request.params;
     const deleted = await Endereco.destroy({
       where: { id: id }
     });
     if (deleted) {
-      res.status(204).send();
+      response.status(204).send();
     } else {
-      res.status(404).json({ message: 'Endereço não encontrado' });
+      response.status(404).json({ message: 'Endereço não encontrado' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };

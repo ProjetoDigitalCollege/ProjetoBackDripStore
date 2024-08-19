@@ -1,66 +1,66 @@
 import { Categoria } from "../Models/1.Categoria.js";
 
-export const getAllCategories = async (req, res) => {
+export const getAllCategories = async (request, response) => {
   try {
     const categoria = await Categoria.findAll();
-    res.status(200).json(categoria);
+    response.status(200).json(categoria);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const getCategoryById = async (req, res) => {
+export const getCategoryById = async (request, response) => {
   try {
-    const { id } = req.params;
+    const { id } = request.params;
     const categoria = await Categoria.findByPk(id);
     if (categoria) {
-      res.status(200).json(categoria);
+      response.status(200).json(categoria);
     } else {
-      res.status(404).json({ message: 'Categoria não encontrada' });
+      response.status(404).json({ message: 'Categoria não encontrada' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const createCategory = async (req, res) => {
+export const createCategory = async (request, response) => {
   try {
-    const categoria = await Categoria.create(req.body);
-    res.status(201).json(categoria);
+    const categoria = await Categoria.create(request.body);
+    response.status(201).json(categoria);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const updateCategory = async (req, res) => {
+export const updateCategory = async (request, response) => {
   try {
-    const { id } = req.params;
-    const [updated] = await Categoria.update(req.body, {
+    const { id } = request.params;
+    const [updated] = await Categoria.update(request.body, {
       where: { id: id }
     });
     if (updated) {
       const updatedCategory = await Categoria.findByPk(id);
-      res.status(200).json(updatedCategory);
+      response.status(200).json(updatedCategory);
     } else {
-      res.status(404).json({ message: 'Categoria não encontrada' });
+      response.status(404).json({ message: 'Categoria não encontrada' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
 
-export const deleteCategory = async (req, res) => {
+export const deleteCategory = async (request, response) => {
   try {
-    const { id } = req.params;
+    const { id } = request.params;
     const deleted = await Categoria.destroy({
       where: { id: id }
     });
     if (deleted) {
-      res.status(204).send();
+      response.status(204).send();
     } else {
-      res.status(404).json({ message: 'Categoria não encontrada' });
+      response.status(404).json({ message: 'Categoria não encontrada' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };
