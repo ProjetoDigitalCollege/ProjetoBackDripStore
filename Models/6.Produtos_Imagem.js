@@ -18,8 +18,8 @@ Image.belongsToMany(Produto,
   Produto.belongsToMany(Image, 
   { 
     through: Produtos_Imagem,
-    foreignKey: 'imagem_id', 
-    otherKey: 'produto_id',     
+    foreignKey: 'produto_id', 
+    otherKey: 'imagem_id',     
     onDelete: 'CASCADE',    
     onUpdate: 'CASCADE' 
   });

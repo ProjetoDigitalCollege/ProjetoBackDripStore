@@ -1,4 +1,6 @@
 import { Produto } from "../Models/4.Produto.js";
+import { Produtos_Imagem } from '../Models/6.Produtos_Imagem.js';
+import { Image } from '../Models/3.Image.js';
 
 /**
  * @swagger
@@ -27,7 +29,18 @@ import { Produto } from "../Models/4.Produto.js";
  */
 export const getAllProducts = async (request, response) => {
   try {
-    const produto = await Produto.findAll();
+    const produto = await Produto.findAll({
+      include: [
+        {
+          model: Image,
+          through: {
+            model: Produtos_Imagem,
+            attributes: []
+          },
+          attributes: ['path']
+        }
+      ]
+    });
     response.status(200).json(produto);
   } catch (error) {
     response.status(500).json({ error: error.message });
